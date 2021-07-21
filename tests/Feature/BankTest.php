@@ -26,12 +26,12 @@ class BankTest extends TestCase
         $response->assertSessionHasErrors('title');
     }
 
-        /** @test */
-        public function bank_address_cannot_be_null()
-        {
-            $response = $this->post('/bank/create',array_merge($this->data(),['address' => '']));
-            $response->assertSessionHasErrors('address');
-        }
+    /** @test */
+    public function bank_address_cannot_be_null()
+    {
+        $response = $this->post('/bank/create',array_merge($this->data(),['address' => '']));
+        $response->assertSessionHasErrors('address');
+    }
 
     private function data()
     {

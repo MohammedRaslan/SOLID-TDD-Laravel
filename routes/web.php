@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BankController;
+use App\Http\Controllers\RegularAccountController;
+use App\Http\Controllers\SavingAccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +22,10 @@ Route::get('/', function () {
 
 Route::prefix('bank')->group(function(){
     Route::post('create',[BankController::class,'store']);
+});
+
+Route::prefix('account')->group(function(){
+    Route::post('regular/calculate',[RegularAccountController::class,'calculateTotal']);
+    Route::post('saving/calculate',[SavingAccountController::class,'calculateTotal']);
+
 });
