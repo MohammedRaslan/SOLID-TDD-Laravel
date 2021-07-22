@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\RegularAccountController;
@@ -25,7 +26,7 @@ Route::prefix('bank')->group(function(){
 });
 
 Route::prefix('account')->group(function(){
-    Route::post('regular/calculate',[RegularAccountController::class,'calculateTotal']);
-    Route::post('saving/calculate',[SavingAccountController::class,'calculateTotal']);
+    Route::post('regular/calculate',[AccountController::class,'calculateRegularAccountTotal']);
+    Route::post('saving/calculate',[AccountController::class,'calculateSavingAccountTotal']);
 
 });

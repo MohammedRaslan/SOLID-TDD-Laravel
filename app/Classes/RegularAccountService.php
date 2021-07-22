@@ -1,7 +1,9 @@
 <?php
-namespace App\Services;
+namespace App\Classes;
 
-class RegularAccountService{
+use App\Interfaces\BankAccountInterface;
+
+class RegularAccountService implements BankAccountInterface{
 
     public function calculateTotal($balance)
     {

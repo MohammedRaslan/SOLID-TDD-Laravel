@@ -3,5 +3,5 @@ namespace App\Interfaces;
 
 interface BankAccountInterface{
 
-    public function calculateTotal();
+    public function calculateTotal($balance);
 }
