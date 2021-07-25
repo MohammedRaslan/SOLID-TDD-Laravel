@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BankController;
-use App\Http\Controllers\RegularAccountController;
+use App\Http\Controllers\ExportController;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\SavingAccountController;
+use App\Http\Controllers\RegularAccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +29,10 @@ Route::prefix('bank')->group(function(){
 Route::prefix('account')->group(function(){
     Route::post('regular/calculate',[AccountController::class,'calculateRegularAccountTotal']);
     Route::post('saving/calculate',[AccountController::class,'calculateSavingAccountTotal']);
+});
+
+Route::prefix('export')->group(function(){
+    Route::post('php',[ExportController::class,'exportToPhp']); 
+    Route::post('json',[ExportController::class,'exportToJson']); 
 
 });
