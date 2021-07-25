@@ -6,6 +6,7 @@ use App\Classes\AccountClass;
 use App\Classes\RegularAccountService;
 use App\Interfaces\BankAccountInterface;
 use App\Classes\SavingAccountService;
+use App\Repositories\AccountRepository;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -31,5 +32,10 @@ class AccountController extends Controller
                 'total' =>  $total->calculateTotal($balance)
             ]
         );
+    }
+
+    public function store(Request $request,AccountRepository $AccountRepository)
+    {
+        $AccountRepository->store($request->all());
     }
 }

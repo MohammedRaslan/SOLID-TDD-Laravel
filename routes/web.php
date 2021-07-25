@@ -29,10 +29,9 @@ Route::prefix('bank')->group(function(){
 Route::prefix('account')->group(function(){
     Route::post('regular/calculate',[AccountController::class,'calculateRegularAccountTotal']);
     Route::post('saving/calculate',[AccountController::class,'calculateSavingAccountTotal']);
+    Route::post('store',[AccountController::class,'store']);
 });
 
 Route::prefix('export')->group(function(){
-    Route::post('php',[ExportController::class,'exportToPhp']); 
-    Route::post('json',[ExportController::class,'exportToJson']); 
-
+    Route::post('/',[ExportController::class,'Export']);
 });

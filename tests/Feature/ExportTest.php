@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Account;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -15,28 +16,36 @@ class ExportTest extends TestCase
     public function export_data_as_php_file()
     {
         $this->withoutExceptionHandling();
-        $response = $this->post('export/php',array_merge($this->data(),['extension' => 'PHP']));
-        $response->assertJson([
-            'message' => 'PHP File Exported',
-        ]);
+        $account = $this->post('account/store',$this->accountData());
+        if($account->assertStatus(200)){
+            $response = $this->post('export',array_merge($this->accountData(),['extension' => 'PHP']));
+            $response->assertJson([
+                'message' => 'PHP File Exported',
+            ]);
+        }
+     
     }
 
     /** @test */
     public function export_data_as_json_file()
     {
         $this->withoutExceptionHandling();
-        $response = $this->post('export/json',array_merge($this->data(),['extension' => 'Json']));
-        $response->assertJson([
-            'message' => 'Json File Exported',
-        ]);
+        $account = $this->post('account/store',$this->accountData());
+        if($account->assertStatus(200)){
+            $response = $this->post('export',array_merge($this->accountData(),['extension' => 'Json']));
+            $response->assertJson([
+                'message' => 'Json File Exported',
+            ]);
+        }
     }
 
 
-    protected function data()
-    {
+    private function accountData(){
         return [
-            'title' => 'New File To Export',
-            'name' => 'Raslan',
+            'fname' => 'Mohamed',
+            'lname' => 'Raslan',
+            'phone' => '01111295259',
+            'balance' => 200,
             'extension' => ''
         ];
     }
