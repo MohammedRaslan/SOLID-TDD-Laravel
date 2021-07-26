@@ -12,7 +12,9 @@ class ExportController extends Controller
     {
        $exporter = new Exporter();
        $export   = $exporter->exportFactory($request->all());
-       return $export->Export();
+       return response()->json([
+           'message' => $export->Export(),
+       ]);
     }
 }
 

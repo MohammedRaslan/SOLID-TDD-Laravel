@@ -1,10 +1,10 @@
 <?php
 namespace App\Classes;
 
-use App\Interfaces\ExportInterface;
+use App\Classes\AbstractExport;
 use Illuminate\Support\Facades\File;
 
-class ExportToPhp implements ExportInterface{
+class ExportToPhp extends AbstractExport{
 
     protected $data;
     public function __construct($data) {
@@ -13,15 +13,11 @@ class ExportToPhp implements ExportInterface{
 
     public function Export()
     {
-         $jsonFile = time() . '_file.php';
-        $destinationPath = public_path()."/upload/";
-        if (!is_dir($destinationPath)) {  mkdir($destinationPath,0777,true);  }
+        $fileData = $this->getFileInformation('php');
         unset($this->data['extension']);
-        $exported = File::put($destinationPath.$jsonFile, $this->data);
+        $exported = File::put($fileData['path'].$fileData['file_name'], $this->data);
         if($exported){
-            return response()->json([
-                'message' => 'PHP File Exported',
-            ]);
+            return  'PHP File Exported';
         }
     }
 }
