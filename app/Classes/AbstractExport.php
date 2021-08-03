@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\File;
 
 abstract class AbstractExport{
 
-    public abstract function Export();
+    protected abstract function Export();
 
-    public function getFileInformation($extension)
+    protected function getFileInformation($extension)
     {
         $file_name = time() . '_file.'.$extension;
         $path      = public_path()."/upload/";
