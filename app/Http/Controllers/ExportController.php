@@ -3,18 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Exporter;
-use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 
 class ExportController extends Controller
 {
-    public function Export(Request $request)
+    public function Export(Request $request, Exporter $exporter)
     {
-       $exporter = new Exporter();
-       $export   = $exporter->exportFactory($request->all());
-       return response()->json([
-           'message' => $export->Export(),
-       ]);
+       $export = $exporter->exportFactory($request->all());
+       return response()->json($export->Export());
     }
 }
 

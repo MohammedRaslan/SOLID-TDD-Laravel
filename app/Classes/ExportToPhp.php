@@ -17,7 +17,9 @@ class ExportToPhp extends AbstractExport{
         unset($this->data['extension']);
         $exported = File::put($fileData['path'].$fileData['file_name'], $this->data);
         if($exported){
-            return  'PHP File Exported';
+            return [
+                'message' => 'PHP File Exported'
+            ];
         }
     }
 }
